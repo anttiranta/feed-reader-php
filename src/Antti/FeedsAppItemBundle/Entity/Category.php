@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Antti\FeedsAppItemBundle\Repository\CategoryRepository")
- * @ORM\Table(name="feeds_app_item_category", uniqueConstraints={@ORM\UniqueConstraint(name="domain_idx", columns={"category_domain"})})
+ * @ORM\Table(name="feeds_app_item_category", uniqueConstraints={@ORM\UniqueConstraint(name="domain_idx", columns={"category_domain"})}, indexes={@ORM\Index(name="name_idx", columns={"name"})})
  */
 class Category
 {

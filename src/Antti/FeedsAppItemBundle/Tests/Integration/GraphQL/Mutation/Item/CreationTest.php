@@ -3,6 +3,7 @@ namespace App\Antti\FeedsAppItemBundle\Tests\Integration\GraphQL\Mutation\Item;
 
 use GraphQLClient\Field;
 use GraphQLClient\Query;
+use GraphQLClient\Variable;
 use App\Antti\FeedsAppItemBundle\Entity\Item;
 use App\Antti\FeedsAppItemBundle\Tests\Integration\GraphQL\AbstractGraphQLTest;
 
@@ -17,7 +18,9 @@ class CreationTest extends AbstractGraphQLTest
             'input' => [
                 'title' => $itemTitle,
                 'link' => $itemLink,
-                'pubDate' => 'Tue, 26 Oct 2004 14:01:01 -0500'
+                'pubDate' => new Variable(
+                            'pubDate', "2004-10-26 14:01:01", 'DateTime!'
+                        ) // TODO: timezone!
             ]
         ];
         

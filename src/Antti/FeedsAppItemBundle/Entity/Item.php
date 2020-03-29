@@ -7,7 +7,7 @@ use App\Antti\FeedsAppItemBundle\Util\Item\CollectionUtils;
 
 /**
  * @ORM\Entity(repositoryClass="App\Antti\FeedsAppItemBundle\Repository\ItemRepository")
- * @ORM\Table(name="feeds_app_item")
+ * @ORM\Table(name="feeds_app_item", indexes={@ORM\Index(name="title_idx", columns={"title"})})
  * @ORM\HasLifecycleCallbacks
  */
 class Item
