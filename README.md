@@ -20,16 +20,11 @@ Task is to create a PHP application that is a feeds reader. The app can read fee
 
 ## Installation
 
-Clone app:
-
-```
-$ git clone git@github.com:janit/symfony-hybrid-flex-port.git
-```
-
 Set local environment variables
 
 ```
 $ cp .env.dist .env
+$ cp .env.test.dist .env.test
 ```
 
 Install dependencies:
