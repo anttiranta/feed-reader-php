@@ -1,0 +1,7 @@
+FilterLikeTypeInput:
+    type: input-object
+    config:
+        fields:
+            like:
+                description: "Use this attribute to perform a like query ('somevalue%') on the specific string."
+                type: String!

@@ -1,0 +1,6 @@
+DateTime:
+    type: custom-scalar
+    config:
+        serialize: ["App\\Antti\\FeedsAppItemBundle\\GraphQL\\Type\\DateTimeType", "serialize"]
+        parseValue: ["App\\Antti\\FeedsAppItemBundle\\GraphQL\\Type\\DateTimeType", "parseValue"]
+        parseLiteral: ["App\\Antti\\FeedsAppItemBundle\\GraphQL\\Type\\DateTimeType", "parseLiteral"]

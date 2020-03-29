@@ -1,0 +1,11 @@
+ItemList:
+  type: object
+  config:
+    description: "A query to return list of items"
+    fields:
+      items:
+        type: "[Item]!"
+        description: "Item details"
+      totalCount:
+        type: Int
+        description: "Total records count"

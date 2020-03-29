@@ -1,0 +1,18 @@
+Item:
+    type: object
+    config:
+        fields:
+            id:
+                type: ID!
+            title: 
+                type: String!
+            description: 
+                type: String
+            link: 
+                type: String
+            pubDate: 
+                type: DateTime!
+            comments: 
+                type: String
+            category:
+                type: Category

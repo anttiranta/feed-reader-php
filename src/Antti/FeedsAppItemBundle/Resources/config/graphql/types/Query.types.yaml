@@ -1,0 +1,29 @@
+Query:
+    type: object
+    config:
+        fields:
+            getItemById:
+                type: Item
+                args:
+                    id:
+                        type: Int
+                resolve: '@=resolver("App\\Antti\\FeedsAppItemBundle\\GraphQL\\Resolver\\ItemResolver::resolve", [args["id"]])'
+            items:
+                type: ItemList
+                args:
+                    limit:
+                        description: "Specifies the maximum number of results to return at once. The default value is 20"
+                        type: Int
+                    p:
+                        description: "Specifies which page of results to return. The default value is 1"
+                        type: Int
+                    filter:
+                        type: ItemFilterInput
+                resolve: '@=resolver("App\\Antti\\FeedsAppItemBundle\\GraphQL\\Resolver\\Item\\ListResolver::resolve", [args])'
+            categories:
+                type: CategoryList
+                args:
+                    limit:
+                        description: "Specifies the maximum number of results to return at once. The default value is 20"
+                        type: Int
+                resolve: '@=resolver("App\\Antti\\FeedsAppItemBundle\\GraphQL\\Resolver\\Category\\ListResolver::resolve", [args])'

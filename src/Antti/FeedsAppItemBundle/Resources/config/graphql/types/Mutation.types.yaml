@@ -1,0 +1,22 @@
+Mutation:
+    type: object
+    config:
+        fields:
+            createItem:
+                type: Item!
+                resolve: '@=mutation("App\\Antti\\FeedsAppItemBundle\\GraphQL\\Mutation\\ItemMutation::createItem", [args])'
+                args:
+                    input:
+                        type: ItemCreationInput!
+            updateItem:
+                type: Item!
+                resolve: '@=mutation("App\\Antti\\FeedsAppItemBundle\\GraphQL\\Mutation\\ItemMutation::updateItem", [args])'
+                args:
+                    input:
+                        type: ItemUpdateInput!
+            removeItem:
+                type: Int!
+                resolve: '@=mutation("App\\Antti\\FeedsAppItemBundle\\GraphQL\\Mutation\\ItemMutation::removeItem", [args])'
+                args:
+                    id:
+                        type: Int

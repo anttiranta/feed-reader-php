@@ -1,0 +1,10 @@
+ItemFilterInput:
+    type: input-object
+    config:
+        fields:
+            title:
+                description: "Filters by the display title of the item"
+                type: FilterLikeTypeInput
+            categoryName:
+                description: "Filters by the display name of the item's category"
+                type: FilterLikeTypeInput

@@ -1,0 +1,8 @@
+CategoryList:
+  type: object
+  config:
+    description: "A query to return list of categiories"
+    fields:
+      categories:
+        type: "[Category]"
+        description: "Category details"

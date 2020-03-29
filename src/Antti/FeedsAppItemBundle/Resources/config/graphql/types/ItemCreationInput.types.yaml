@@ -1,0 +1,18 @@
+ItemCreationInput:
+    type: input-object
+    config:
+      fields:
+          id:
+              type: ID
+          title:
+              type: String!
+          description:
+              type: String
+          link:
+              type: String
+          pubDate:
+              type: DateTime!
+          comments:
+              type: String
+          categoryId:
+              type: Int    
