@@ -12,7 +12,7 @@ class DateTimeType
      */
     public static function serialize(\DateTime $value)
     {
-        return $value->format('Y-m-d H:i:s'); // TODO: timezone?
+        return $value->format(\DateTime::ATOM);
     }
 
     /**
@@ -22,7 +22,7 @@ class DateTimeType
      */
     public static function parseValue($value)
     {
-        return new \DateTime($value); // TODO: timezone?
+        return new \DateTime($value);
     }
 
     /**
@@ -32,6 +32,6 @@ class DateTimeType
      */
     public static function parseLiteral($valueNode)
     {
-        return \DateTime($valueNode->value); // TODO: timezone?
+        return \DateTime($valueNode->value);
     }
 }

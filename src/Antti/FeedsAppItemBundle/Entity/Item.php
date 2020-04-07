@@ -52,6 +52,12 @@ class Item
      * @ORM\Column(name="published_date", type="datetime")
      */
     private $pubDate;
+    
+    /** 
+     * @var string
+     * @ORM\Column(name="published_timezone", type="string", nullable=true) 
+     */
+    private $pubTimezone;
 
     /**
      * @var Category
@@ -129,12 +135,24 @@ class Item
 
     public function getPubDate(): ?\DateTime
     {
+        if ($this->pubDate !== null && $this->pubTimezone !== null) {
+            if ($this->pubDate->getTimeZone()->getName() !== $this->pubTimezone) {
+                $this->assignTimezoneToDateTime(
+                    $this->pubDate, 
+                    $this->pubTimezone
+                );
+            }
+        }
         return $this->pubDate;
     }
 
     public function setPubDate(\DateTime $pubDate): self
     {
         $this->pubDate = $pubDate;
+        
+        if($this->pubDate->getTimeZone()) {
+            $this->pubTimezone = $this->pubDate->getTimeZone()->getName();
+        }
         return $this;
     }
 
@@ -213,5 +231,13 @@ class Item
                 $this->getCategory()->getItems()->add($this);
             }
         }
+    }
+    
+    private function assignTimezoneToDateTime(\DateTime &$date, string $tzName) 
+    {
+        $date = new \DateTime(
+            $date->format('Y-m-d\TH:i:s'), 
+            new \DateTimeZone($tzName)
+        );
     }
 }

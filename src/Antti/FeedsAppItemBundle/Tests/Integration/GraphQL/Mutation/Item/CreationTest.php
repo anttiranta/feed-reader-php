@@ -19,8 +19,8 @@ class CreationTest extends AbstractGraphQLTest
                 'title' => $itemTitle,
                 'link' => $itemLink,
                 'pubDate' => new Variable(
-                            'pubDate', "2004-10-26 14:01:01", 'DateTime!'
-                        ) // TODO: timezone!
+                    'pubDate', "2004-10-26T14:01:01-03:00", 'DateTime!'
+                )
             ]
         ];
         
@@ -39,5 +39,9 @@ class CreationTest extends AbstractGraphQLTest
         
         $this->assertEquals($itemTitle, $item->getTitle());
         $this->assertEquals($itemLink, $item->getLink());
+        $this->assertEquals(
+            "2004-10-26T14:01:01-03:00",
+            $item->getPubDate()->format(\DateTime::ATOM)
+        );
     }
 }

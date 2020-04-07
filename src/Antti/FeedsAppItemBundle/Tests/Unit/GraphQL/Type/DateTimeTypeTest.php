@@ -8,20 +8,20 @@ class DateTimeTypeTest extends TestCase
 {
     public function testSerialize(): void
     {
-        $date = new \DateTime('Tue, 26 Oct 2004 14:01:01 -0500', new \DateTimeZone('Europe/London'));
+        $date = new \DateTime('2004-10-26T14:01:01-05:00');
         
         $dateStr = DateTimeType::serialize($date);
         
-        $this->assertEquals('2004-10-26 14:01:01', $dateStr); // TODO: timezone!
+        $this->assertEquals('2004-10-26T14:01:01-05:00', $dateStr);
     }
     
     public function testParseValue(): void
     {
-        $dateStr = 'Tue, 26 Oct 2004 14:01:01 -0500';
+        $dateStr = '2004-10-26T14:01:01-05:00';
         
         $date = DateTimeType::parseValue($dateStr);
         
-        $this->assertEquals('2004-10-26 14:01:01', $date->format('Y-m-d H:i:s')); // TODO: timezone!
+        $this->assertEquals($dateStr, $date->format(\DateTime::ATOM));
     }
 }
 

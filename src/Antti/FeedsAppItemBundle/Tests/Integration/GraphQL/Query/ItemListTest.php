@@ -38,15 +38,15 @@ class ItemListTest extends AbstractGraphQLTest
         
         $this->assertEquals("RSS Resources", $fields[self::$KEY_ITEMS][0][self::$KEY_TITLE]);
         $this->assertEquals("http://www.feedforall.com", $fields[self::$KEY_ITEMS][0][self::$KEY_LINK]);
-        $this->assertEquals('2004-10-26 14:01:01', $fields[self::$KEY_ITEMS][0][self::$KEY_PUB_DATE]); // TODO: timezone!
+        $this->assertEquals('2004-10-26T14:01:01-05:00', $fields[self::$KEY_ITEMS][0][self::$KEY_PUB_DATE]);
         
         $this->assertEquals("Recommended Desktop Feed Reader Software", $fields[self::$KEY_ITEMS][1][self::$KEY_TITLE]);
         $this->assertEquals("http://www.feedforall.com/feedforall-partners.htm", $fields[self::$KEY_ITEMS][1][self::$KEY_LINK]);
-        $this->assertEquals('2004-10-26 14:03:25', $fields[self::$KEY_ITEMS][1][self::$KEY_PUB_DATE]); // TODO: timezone!
+        $this->assertEquals('2004-10-26T14:03:25-05:00', $fields[self::$KEY_ITEMS][1][self::$KEY_PUB_DATE]);
         
         $this->assertEquals("Recommended Web Based Feed Reader Software", $fields[self::$KEY_ITEMS][2][self::$KEY_TITLE]);
         $this->assertEquals("http://www.feedforall.com/feedforall-partners.htm", $fields[self::$KEY_ITEMS][2][self::$KEY_LINK]);
-        $this->assertEquals('2004-10-26 14:06:44', $fields[self::$KEY_ITEMS][2][self::$KEY_PUB_DATE]); // TODO: timezone!
+        $this->assertEquals('2010-01-28T15:00:00+03:00', $fields[self::$KEY_ITEMS][2][self::$KEY_PUB_DATE]);
         
         $this->assertEquals(3, (int)$fields[self::$KEY_TOTAL_COUNT]);
     }
