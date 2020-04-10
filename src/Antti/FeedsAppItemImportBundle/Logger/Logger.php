@@ -1,7 +1,7 @@
 <?php
 namespace App\Antti\FeedsAppItemImportBundle\Logger;
 
-use Monolog\Logger as BaseLogger;
+use \Monolog\Logger as BaseLogger;
 use App\Antti\FeedsAppItemImportBundle\Logger\Error as ErrorHandler;
 use App\Antti\FeedsAppItemImportBundle\Logger\Info as InfoHandler;
 

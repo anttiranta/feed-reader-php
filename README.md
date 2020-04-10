@@ -13,11 +13,6 @@ Task is to create a PHP application that is a feeds reader. The app can read fee
 - As a user, I want to update/delete an item
 - Implementation should be covered with unit tests
 
-## Under progress
-
-- There are still some open todos
-- As a developer, I want to run a command which accepts the feed urls (separated by comma) as argument to grab items from given urls. Duplicate items are accepted. 
-
 ## Installation
 
 Set local environment variables

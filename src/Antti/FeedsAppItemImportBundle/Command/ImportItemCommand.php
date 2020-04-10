@@ -11,6 +11,8 @@ use Psr\Log\LoggerInterface;
 use App\Antti\FeedsAppItemImportBundle\Logger\ConsoleLogger;
 use App\Antti\FeedsAppItemImportBundle\Logger\LoggerComposite;
 use App\Antti\FeedsAppItemImportBundle\Logger\Logger as DefaultLogger;
+use App\Antti\FeedsAppItemImportBundle\Model\Item\Import\Job\Transport;
+use App\Antti\FeedsAppItemImportBundle\Model\Item\Import\Job\Processor;
 
 /**
  * To use this command, open a terminal window, enter into your project
@@ -42,6 +44,16 @@ class ImportItemCommand extends Command
     private $logger;
     
     /**
+     * @var Transport 
+     */
+    private $transportJob;
+    
+    /**
+     * @var Processor 
+     */
+    private $processorJob;
+    
+    /**
      * @var array 
      */
     private $urls = [];
@@ -53,12 +65,16 @@ class ImportItemCommand extends Command
 
     public function __construct(
         EntityManagerInterface $em,
-        UrlArgumentNormalizer $urlArgumentNormalizer
+        UrlArgumentNormalizer $urlArgumentNormalizer,
+        Transport $transportJob,
+        Processor $processorJob    
     ){
         parent::__construct();
         
         $this->entityManager = $em;
         $this->urlArgumentNormalizer = $urlArgumentNormalizer;
+        $this->transportJob = $transportJob;
+        $this->processorJob = $processorJob;
     }
 
     /**
@@ -73,7 +89,7 @@ class ImportItemCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function initialize(InputInterface $input, OutputInterface $output): void
+    protected function initialize(InputInterface $input, OutputInterface $output)
     {
         // SymfonyStyle is an optional feature that Symfony provides so you can
         // apply a consistent look to the commands of your application.
@@ -87,22 +103,32 @@ class ImportItemCommand extends Command
         // Have to be done get ConsoleLogger to write lines to console
         $output->setVerbosity(OutputInterface::VERBOSITY_VERY_VERBOSE);
         
-        $this->logger = new LoggerComposite(
-            [
-                new ConsoleLogger($output),
-                new DefaultLogger()
-            ]
-         );
+        $this->logger = new LoggerComposite([
+            new ConsoleLogger($output),
+            new DefaultLogger()
+        ]);
+        $this->transportJob->setLogger($this->logger);
+        $this->processorJob->setLogger($this->logger);
     }
 
     /**
-     * This method is executed after interact() and initialize(). It usually
-     * contains the logic to execute to complete this command task.
+     * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->info('Starting import');
         
-        // TODO!
+        $items = [];
+        foreach ($this->urls as $url) {
+            $items = array_merge($items, $this->transportJob->process($url));
+        }
+        
+        $result = $this->processorJob->processAll($items);
+        
+        $this->logger->info(
+            sprintf('Import %s', $result ? ' was successful' : 'failed')
+        );
+        
+        return $result ? 0 : 1;
     }
 }

@@ -240,4 +240,27 @@ class Item
             new \DateTimeZone($tzName)
         );
     }
+    
+    public function __toString(): string 
+    {
+        $formatLine = function ($k, $v, $suffix = ', ') {
+            return $k . ': ' . $v . $suffix;
+        };
+        
+        return $formatLine('id', $this->getId()) . 
+            $formatLine('title', $this->getTitle()) . 
+            $formatLine('description', $this->getDescription()) . 
+            $formatLine('link', $this->getLink()) . 
+            $formatLine('category', $this->getCategory() !== null 
+                ? (string)$this->getCategory() 
+                : '') . 
+            $formatLine('comments', $this->getComments()) . 
+            $formatLine(
+                'pubDate', 
+                $this->getPubDate() !== null
+                ? $this->getPubDate()->format(\DateTime::ATOM)
+                : '', 
+                ''
+            );
+    }
 }

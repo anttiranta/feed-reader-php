@@ -82,8 +82,10 @@ class Category
         return $this->items;
     }
 
-    public function __toString(): string
+    public function __toString(): string 
     {
-        return $this->name;
+        return 'id: ' . $this->getId() . ', '
+            . 'name: ' . $this->getName() . ', '
+            . 'domain: ' . $this->getDomain();
     }
 }
